@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp"
+    android:backgroundTint="#FFFFFF"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="0dp"
+    app:strokeColor="#EFE5EA"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- ================= AVATAR ================= -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            app:cardBackgroundColor="#FCE4EC"
+            app:cardCornerRadius="26dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <ImageView
+                android:id="@+id/ivProfil"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_person" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ================= INFO ================= -->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama User"
+                android:textColor="#2B1D24"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+            <!-- USERNAME -->
+
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Administrator"
+                android:textColor="#2B1D24"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <!-- PASSWORD -->
+
+            <TextView
+                android:id="@+id/tvPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Password : 123"
+                android:textColor="#A0979D"
+                android:textSize="12sp"/>
+
+            <!-- ROLE BADGE -->
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardRole"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#FFF0F5"
+                app:cardCornerRadius="14dp">
+
+                <TextView
+                    android:id="@+id/tvRole"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Admin"
+                    android:textColor="#B1456E"
+                    android:textSize="11sp"
+                    android:textStyle="bold"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- ================= ACTION ================= -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- EDIT -->
+
+            <ImageButton
+                android:id="@+id/btnEdit"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="#FCE4EC"
+                android:padding="9dp"
+                android:src="@android:drawable/ic_menu_edit"
+                android:tint="#B1456E"/>
+
+            <!-- DELETE -->
+
+            <ImageButton
+                android:id="@+id/btnDelete"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="8dp"
+                android:background="#FFF1F3"
+                android:padding="9dp"
+                android:src="@android:drawable/ic_menu_delete"
+                android:tint="#E45A76"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

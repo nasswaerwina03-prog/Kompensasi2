@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Kompensasi">
+
+        <activity android:name=".DashboardAdminActivity" />
+        <activity android:name=".DashboardDosenPaActivity" />
+        <activity android:name=".DashboardMahasiswaActivity" />
+        <activity android:name=".DashboardKajurActivity" />
+        <activity android:name=".DashboardSekjurActivity" />
+        <activity android:name=".UserActivity"/>
+        <activity android:name=".EditUserActivity"/>
+        <activity android:name=".KelolaMahasiswaActivity"/>
+        <activity android:name=".KelolaKompensasiActivity"/>
+        <activity android:name=".KelolaVerifikasiActivity"/>
+        <activity android:name=".DetailKompensasiActivity"/>
+        <activity android:name=".PengajuanActivity"/>
+        <activity android:name=".ValidasiSekjurActivity"/>
+        <activity android:name=".ValidasiKajurActivity"/>
+        <activity android:name=".DownloadPdfActivity"/>
+        <activity android:name=".ProfileAdminActivity"/>
+        <activity android:name=".ProfileDosenActivity"/>
+        <activity android:name=".ProfileMahasiswaActivity"/>
+        <activity android:name=".ProfileUserActivity"/>
+        <activity android:name=".PengajuanMasukActivity"/>
+        <activity android:name=".TambahTugasActivity"/>
+        <activity android:name=".LaporanActivity"/>
+        <activity android:name=".LupaPasswordActivity"/>
+        <activity android:name=".ResetPasswordActivity"/>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+    </application>
+
+</manifest>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp"
+    android:backgroundTint="#FFFFFF"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="1dp"
+    app:strokeColor="#F1DCE5"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="18dp">
+
+        <!-- ================= ICON ================= -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:cardBackgroundColor="#FCE4EC"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="0dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfil"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_person"
+                app:civ_border_color="#B1456E"
+                app:civ_border_width="1dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ================= INFO ================= -->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- NAMA -->
+
+            <TextView
+                android:id="@+id/tvNamaMahasiswa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Mahasiswa"
+                android:textColor="#2B1D24"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <!-- NIM -->
+
+            <TextView
+                android:id="@+id/tvNim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="220001"
+                android:textColor="#9A8E95"
+                android:textSize="12sp"/>
+
+            <!-- KELAS -->
+
+            <TextView
+                android:id="@+id/tvKelas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="IF-22-A"
+                android:textColor="#B1456E"
+                android:textSize="11sp"
+                android:textStyle="bold"/>
+
+            <!-- JUMLAH menit -->
+
+            <TextView
+                android:id="@+id/tvJumlahmenit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Jumlah Kompensasi : 10 menit"
+                android:textColor="#9A8E95"
+                android:textSize="13sp"/>
+
+            <!-- SISA menit -->
+
+            <TextView
+                android:id="@+id/tvSisamenit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="Sisa menit : 8 menit"
+                android:textColor="#E57373"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+            <!-- STATUS -->
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:paddingStart="10dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="4dp"
+                android:text="Pending"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold"/>
+
+            <!-- TANGGAL MULAI -->
+
+            <TextView
+                android:id="@+id/tvTanggalMulai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Mulai : -"
+                android:textColor="#9A8E95"
+                android:textSize="12sp"/>
+
+            <!-- TANGGAL KOMPENSASI -->
+
+            <TextView
+                android:id="@+id/tvTanggalKompensasi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Kompensasi : -"
+                android:textColor="#9A8E95"
+                android:textSize="12sp"/>
+
+            <!-- TANGGAL SELESAI -->
+
+            <TextView
+                android:id="@+id/tvTanggalSelesai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Selesai : -"
+                android:textColor="#9A8E95"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <!-- ================= ACTION ================= -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- DETAIL -->
+
+            <ImageView
+                android:id="@+id/btnDetail"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginEnd="8dp"
+                android:background="#F3E8FF"
+                android:padding="9dp"
+                android:src="@android:drawable/ic_menu_info_details"
+                android:tint="#7E57C2"/>
+
+            <!-- EDIT -->
+
+            <ImageView
+                android:id="@+id/btnEdit"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginEnd="8dp"
+                android:background="#EEF5FF"
+                android:padding="9dp"
+                android:src="@android:drawable/ic_menu_edit"
+                android:tint="#4A90E2"/>
+
+            <!-- DELETE -->
+
+            <ImageView
+                android:id="@+id/btnDelete"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="#FFF1F3"
+                android:padding="9dp"
+                android:src="@android:drawable/ic_menu_delete"
+                android:tint="#E57373"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

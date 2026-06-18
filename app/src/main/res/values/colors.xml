@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="bgPink">#FFE4EF</color>
+    <color name="mainPink">#E75480</color>
+    <color name="darkPink">#B03060</color>
+    <color name="softPink">#FFC1D6</color>
+    <color name="chip_color">#FFF0F5</color>
+    <color name="purple_500">#B1456E</color>
+    <color name="purple_200">#E8C8D6</color>
+</resources>

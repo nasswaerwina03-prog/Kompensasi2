@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F4F6"
+    tools:context=".PengajuanActivity">
+
+    <!-- SCROLL -->
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="120dp">
+
+            <!-- HEADER -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#C85A84"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/btnBack"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_media_previous"
+                        android:tint="@android:color/white"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:text="Pengajuan Kompensasi"
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Silakan isi form pengajuan kompensasi"
+                    android:textColor="#FFEAF1"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+
+            <!-- CONTENT -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- INFO MAHASISWA -->
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="1dp"
+                    app:strokeColor="#F1DCE5"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Informasi Mahasiswa"
+                            android:textColor="#2B1D24"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
+
+                        <!-- NAMA -->
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="Nama Mahasiswa"
+                            android:textColor="#666666"
+                            android:textStyle="bold"/>
+
+                        <EditText
+                            android:id="@+id/etNama"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_edittext"
+                            android:enabled="false"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:textColor="#2B1D24"/>
+
+                        <!-- NIM -->
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="NIM"
+                            android:textColor="#666666"
+                            android:textStyle="bold"/>
+
+                        <EditText
+                            android:id="@+id/etNim"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_edittext"
+                            android:enabled="false"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:textColor="#2B1D24"/>
+
+                        <!-- KELAS -->
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="Kelas"
+                            android:textColor="#666666"
+                            android:textStyle="bold"/>
+
+                        <EditText
+                            android:id="@+id/etKelas"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_edittext"
+                            android:enabled="false"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:textColor="#2B1D24"/>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- DETAIL -->
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="#FFFFFF"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="1dp"
+                    app:strokeColor="#F1DCE5"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Detail Kompensasi"
+                            android:textColor="#2B1D24"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
+
+                        <!-- TUGAS -->
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="Tugas Kompensasi"
+                            android:textColor="#666666"
+                            android:textStyle="bold"/>
+
+                        <Spinner
+                            android:id="@+id/spinnerMatkul"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_edittext"/>
+
+                        <!-- MENIT -->
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="Jumlah Menit"
+                            android:textColor="#666666"
+                            android:textStyle="bold"/>
+
+                        <EditText
+                            android:id="@+id/etMenit"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_edittext"
+                            android:enabled="false"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:textColor="#2B1D24"/>
+
+                        <!-- JAM MULAI -->
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="Jam Mulai (otomatis)"
+                            android:textColor="#666666"
+                            android:textStyle="bold"/>
+
+                        <EditText
+                            android:id="@+id/etJamMulai"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_edittext"
+                            android:enabled="false"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:textColor="#2B1D24"
+                            android:hint="Akan terisi otomatis"/>
+
+                        <!-- JAM SELESAI -->
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="Jam Selesai (otomatis saat submit)"
+                            android:textColor="#666666"
+                            android:textStyle="bold"/>
+
+                        <EditText
+                            android:id="@+id/etJamSelesai"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_edittext"
+                            android:enabled="false"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:textColor="#2B1D24"
+                            android:hint="Akan terisi saat submit"/>
+
+                        <!-- KETERANGAN (Opsional) -->
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="Keterangan (Opsional)"
+                            android:textColor="#666666"
+                            android:textStyle="bold"/>
+
+                        <EditText
+                            android:id="@+id/etKeterangan"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_edittext"
+                            android:enabled="true"
+                            android:gravity="top"
+                            android:padding="16dp"
+                            android:hint="Tambahkan keterangan (opsional)"
+                            android:textColor="#2B1D24"/>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- LAMPIRAN -->
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="#FFFFFF"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="1dp"
+                    app:strokeColor="#F1DCE5"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Video Bukti"
+                            android:textColor="#2B1D24"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Upload video bukti pengerjaan kompensasi"
+                            android:textColor="#999999"
+                            android:textSize="13sp"/>
+
+                        <LinearLayout
+                            android:id="@+id/btnUpload"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_marginTop="18dp"
+                            android:background="@drawable/bg_upload"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@android:drawable/ic_menu_upload"
+                                android:tint="#C85A84"/>
+
+                            <TextView
+                                android:id="@+id/tvUpload"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Pilih Video"
+                                android:textColor="#C85A84"
+                                android:textStyle="bold"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- BUTTON -->
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAjukan"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:layout_marginTop="28dp"
+                    android:backgroundTint="#C85A84"
+                    android:text="Ajukan Kompensasi"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="18dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- FLOATING NAVBAR -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bottomNavbar"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#FFFFFF"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- HOME -->
+            <LinearLayout
+                android:id="@+id/menuHome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_compass"
+                    android:tint="#999999" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Home"
+                    android:textColor="#999999"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- AJUKAN -->
+            <LinearLayout
+                android:id="@+id/menuAjukan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_upload"
+                    android:tint="#C85A84" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Ajukan"
+                    android:textColor="#C85A84"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- LOGOUT -->
+            <LinearLayout
+                android:id="@+id/navLogout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_lock_power_off"
+                    android:tint="#E57373" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Logout"
+                    android:textColor="#E57373"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
