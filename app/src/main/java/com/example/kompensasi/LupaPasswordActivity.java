@@ -55,7 +55,7 @@ public class LupaPasswordActivity extends AppCompatActivity {
             }
 
             if (email.isEmpty()) {
-                Toast.makeText(this, "Email belum didaftarkan. Hubungi Administrator.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Anda belum memasukan email, silahkan hubungi admin untuk melihat/mengganti passsword anda", Toast.LENGTH_LONG).show();
                 return;
             }
 

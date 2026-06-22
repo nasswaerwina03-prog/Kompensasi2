@@ -27,15 +27,19 @@ public class ValidasiSekjurAdapter
     ArrayList<PengajuanModel> list;
 
     DatabaseHelper databaseHelper;
+    Runnable onDataChanged;
 
     public ValidasiSekjurAdapter(
             Context context,
-            ArrayList<PengajuanModel> list
+            ArrayList<PengajuanModel> list,
+            Runnable onDataChanged
     ) {
 
         this.context = context;
 
         this.list = list;
+        
+        this.onDataChanged = onDataChanged;
 
         databaseHelper =
                 new DatabaseHelper(context);
@@ -113,6 +117,7 @@ public class ValidasiSekjurAdapter
                 model.setStatusSekjur("Disetujui");
 
                 notifyDataSetChanged();
+                if (onDataChanged != null) onDataChanged.run();
 
                 Snackbar snackbar = Snackbar.make(v, "Berhasil disetujui!", Snackbar.LENGTH_SHORT);
                 snackbar.setBackgroundTint(Color.parseColor("#4CAF50"));

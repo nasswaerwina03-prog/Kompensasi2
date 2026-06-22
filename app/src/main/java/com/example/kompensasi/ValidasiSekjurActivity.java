@@ -51,6 +51,13 @@ public class ValidasiSekjurActivity
 
     ValidasiSekjurAdapter adapter;
 
+    // ================= PAGINATION =================
+    com.google.android.material.button.MaterialButton btnPrevPage, btnNextPage;
+    TextView tvPageInfo;
+    private int currentPage = 0;
+    private static final int ITEMS_PER_PAGE = 50;
+    private int totalFilteredData = 0;
+
     @Override
     // ================= INISIALISASI HALAMAN (ONCREATE) =================
     // Posisi ini dijalankan pertama kali saat halaman dibuka untuk mengatur tampilan.
@@ -98,6 +105,25 @@ public class ValidasiSekjurActivity
         navLogout =
                 findViewById(R.id.navLogout);
 
+        btnPrevPage = findViewById(R.id.btnPrevPage);
+        btnNextPage = findViewById(R.id.btnNextPage);
+        tvPageInfo = findViewById(R.id.tvPageInfo);
+
+        btnPrevPage.setOnClickListener(v -> {
+            if (currentPage > 0) {
+                currentPage--;
+                applyFilter();
+            }
+        });
+
+        btnNextPage.setOnClickListener(v -> {
+            int maxPage = (totalFilteredData - 1) / ITEMS_PER_PAGE;
+            if (currentPage < maxPage) {
+                currentPage++;
+                applyFilter();
+            }
+        });
+
         // ================= RECYCLER =================
 
         list =
@@ -106,7 +132,8 @@ public class ValidasiSekjurActivity
         adapter =
                 new ValidasiSekjurAdapter(
                         this,
-                        list
+                        list,
+                        this::loadData
                 );
 
         recyclerValidasi.setLayoutManager(
@@ -125,6 +152,7 @@ public class ValidasiSekjurActivity
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                currentPage = 0;
                 applyFilter();
             }
 
@@ -134,21 +162,25 @@ public class ValidasiSekjurActivity
 
         btnFilterPending.setOnClickListener(v -> {
             currentFilter = "Pending";
+            currentPage = 0;
             applyFilter();
         });
 
         btnFilterApproved.setOnClickListener(v -> {
             currentFilter = "Disetujui";
+            currentPage = 0;
             applyFilter();
         });
 
         btnFilterAutoApprove.setOnClickListener(v -> {
             currentFilter = "AutoApprove";
+            currentPage = 0;
             applyFilter();
         });
 
         tvTotal.setOnClickListener(v -> {
             currentFilter = "Semua";
+            currentPage = 0;
             applyFilter();
         });
 
@@ -328,9 +360,10 @@ public class ValidasiSekjurActivity
                 String.valueOf(rejected)
         );
 
-        adapter.notifyDataSetChanged();
-
         cursor.close();
+        
+        // Memanggil applyFilter() agar list di-paginate dan adapter di-set dengan pagedList
+        applyFilter();
     }
 
     private void applyFilter() {
@@ -363,10 +396,22 @@ public class ValidasiSekjurActivity
             }
         }
 
+        totalFilteredData = filtered.size();
+        int totalPages = Math.max(1, (int) Math.ceil((double) totalFilteredData / ITEMS_PER_PAGE));
+        tvPageInfo.setText("Halaman " + (currentPage + 1) + " dari " + totalPages);
+
+        int start = currentPage * ITEMS_PER_PAGE;
+        int end = Math.min(start + ITEMS_PER_PAGE, totalFilteredData);
+        ArrayList<PengajuanModel> pagedList = new ArrayList<>();
+        if (start < totalFilteredData) {
+            pagedList = new ArrayList<>(filtered.subList(start, end));
+        }
+
         adapter =
                 new ValidasiSekjurAdapter(
                         this,
-                        filtered
+                        pagedList,
+                        this::loadData
                 );
 
         recyclerValidasi.setAdapter(adapter);

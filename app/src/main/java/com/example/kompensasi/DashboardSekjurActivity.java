@@ -79,7 +79,7 @@ public class DashboardSekjurActivity
         recyclerPengajuan = findViewById(R.id.recyclerPengajuan);
 
         list = new ArrayList<>();
-        adapter = new ValidasiSekjurAdapter(this, list);
+        adapter = new ValidasiSekjurAdapter(this, list, this::loadDashboard);
         recyclerPengajuan.setLayoutManager(new LinearLayoutManager(this));
         recyclerPengajuan.setAdapter(adapter);
 
@@ -188,7 +188,7 @@ public class DashboardSekjurActivity
 
     private void loadDashboard() {
 
-        Cursor cursor = databaseHelper.getAllPengajuan();
+        Cursor cursor = databaseHelper.getPengajuanSekjur();
         int total = 0;
         int pending = 0;
         int disetujui = 0;
@@ -244,6 +244,10 @@ public class DashboardSekjurActivity
     @Override
     protected void onResume() {
         super.onResume();
+        
+        // Refresh data
+        loadDashboard();
+        
         android.content.SharedPreferences preferences = getSharedPreferences("SESSION", MODE_PRIVATE);
         String uname = preferences.getString("username", "");
         if (uname != null && !uname.isEmpty()) {

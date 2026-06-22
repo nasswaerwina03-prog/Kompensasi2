@@ -254,6 +254,12 @@ public class KompensasiAdapter
         });
         // ================= EDIT =================
 
+        if (model.getStatusFinal() != null && model.getStatusFinal().equalsIgnoreCase("Selesai")) {
+            holder.btnEdit.setVisibility(View.GONE);
+        } else {
+            holder.btnEdit.setVisibility(View.VISIBLE);
+        }
+
         holder.btnEdit.setOnClickListener(v -> {
 
             AlertDialog.Builder builder =
@@ -416,6 +422,14 @@ public class KompensasiAdapter
                         model.setSisamenit(
                                 menit
                         );
+
+                        if (menit == 0) {
+                            model.setStatusFinal("Selesai");
+                        } else if (menit > 360) {
+                            model.setStatusFinal("Menunggu Persetujuan");
+                        } else {
+                            model.setStatusFinal("Pending");
+                        }
 
                         notifyDataSetChanged();
 

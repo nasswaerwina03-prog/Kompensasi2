@@ -75,7 +75,7 @@ public class DashboardKajurActivity
         recyclerPengajuan = findViewById(R.id.recyclerPengajuan);
 
         list = new ArrayList<>();
-        adapter = new ValidasiKajurAdapter(this, list);
+        adapter = new ValidasiKajurAdapter(this, list, this::loadDashboard);
         recyclerPengajuan.setLayoutManager(new LinearLayoutManager(this));
         recyclerPengajuan.setAdapter(adapter);
 
@@ -179,7 +179,7 @@ public class DashboardKajurActivity
 
     private void loadDashboard() {
 
-        Cursor cursor = databaseHelper.getAllPengajuan();
+        Cursor cursor = databaseHelper.getPengajuanKajur();
         int total = 0;
         int pending = 0;
         if (cursor.moveToFirst()) {
@@ -230,6 +230,10 @@ public class DashboardKajurActivity
     @Override
     protected void onResume() {
         super.onResume();
+        
+        // Refresh data
+        loadDashboard();
+        
         android.content.SharedPreferences preferences = getSharedPreferences("SESSION", MODE_PRIVATE);
         String uname = preferences.getString("username", "");
         if (uname != null && !uname.isEmpty()) {

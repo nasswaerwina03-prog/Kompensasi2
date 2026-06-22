@@ -64,6 +64,18 @@ public class KelolaKompensasiActivity
 
     ArrayList<Integer> mahasiswaIdList;
 
+    // ================= FILTER & PAGINATION =================
+
+    android.widget.RadioGroup rgFilterKompensasi;
+    com.google.android.material.button.MaterialButton btnPrevPage, btnNextPage;
+    TextView tvPageInfo;
+
+    private int currentPage = 0;
+    private static final int ITEMS_PER_PAGE = 50;
+    private String currentFilter = "Semua";
+    private String currentKeyword = "";
+    private int totalFilteredData = 0;
+
     @Override
     // ================= INISIALISASI HALAMAN (ONCREATE) =================
     // Posisi ini dijalankan pertama kali saat halaman dibuka untuk mengatur tampilan.
@@ -78,6 +90,11 @@ public class KelolaKompensasiActivity
 
         databaseHelper =
                 new DatabaseHelper(this);
+
+        // PATCH FOR EXISTING DATA
+        try {
+            databaseHelper.getWritableDatabase().execSQL("UPDATE tb_kompensasi SET status_final = 'Belum Kompen' WHERE sisa_menit > 0");
+        } catch (Exception e) {}
 
         // ================= INIT =================
 
@@ -110,6 +127,12 @@ public class KelolaKompensasiActivity
 
         btnImportExcelKompensasi =
                 findViewById(R.id.btnImportExcelKompensasi);
+        
+        rgFilterKompensasi = findViewById(R.id.rgFilterKompensasi);
+        btnPrevPage = findViewById(R.id.btnPrevPage);
+        btnNextPage = findViewById(R.id.btnNextPage);
+        tvPageInfo = findViewById(R.id.tvPageInfo);
+
         // ================= RECYCLER =================
 
         kompensasiList =
@@ -140,6 +163,37 @@ public class KelolaKompensasiActivity
             showTambahKompensasiDialog();
         });
 
+        // ================= FILTER =================
+        rgFilterKompensasi.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.rbSelesai) {
+                currentFilter = "Selesai";
+            } else if (checkedId == R.id.rbBelumKompen) {
+                currentFilter = "Belum Kompen";
+            } else if (checkedId == R.id.rbPending) {
+                currentFilter = "Pending";
+            } else {
+                currentFilter = "Semua";
+            }
+            currentPage = 0;
+            loadKompensasiData(currentKeyword);
+        });
+
+        // ================= PAGINATION =================
+        btnPrevPage.setOnClickListener(v -> {
+            if (currentPage > 0) {
+                currentPage--;
+                loadKompensasiData(currentKeyword);
+            }
+        });
+
+        btnNextPage.setOnClickListener(v -> {
+            int maxPage = (int) Math.ceil((double) totalFilteredData / ITEMS_PER_PAGE) - 1;
+            if (currentPage < maxPage) {
+                currentPage++;
+                loadKompensasiData(currentKeyword);
+            }
+        });
+
         // ================= SEARCH =================
 
         etSearchKompensasi.addTextChangedListener(
@@ -163,8 +217,10 @@ public class KelolaKompensasiActivity
                             int count
                     ) {
 
+                        currentKeyword = s.toString();
+                        currentPage = 0;
                         loadKompensasiData(
-                                s.toString()
+                                currentKeyword
                         );
                     }
 
@@ -307,6 +363,8 @@ public class KelolaKompensasiActivity
                         keyword
                 );
 
+        ArrayList<KompensasiModel> tempList = new ArrayList<>();
+
         if (cursor.moveToFirst()) {
 
             do {
@@ -351,31 +409,68 @@ public class KelolaKompensasiActivity
                     fotoProfil = cursor.getString(cursor.getColumnIndexOrThrow("foto_profil"));
                 } catch (Exception e) {}
 
-                kompensasiList.add(
-                        new KompensasiModel(
-                                id,
-                                namaMahasiswa,
-                                nim,
-                                kelas,
-                                jumlahMenit,
-                                sisaMenit,
-                                tugas,
-                                status,
-                                tanggalMulai,
-                                tanggal,
-                                tanggalSelesai,
-                                jamMulai,
-                                jamSelesai,
-                                fotoProfil
-                        )
-                );
+                // FILTER LOGIC
+                boolean matchFilter = true;
+                if (currentFilter.equals("Selesai")) {
+                    if (!(sisaMenit == 0 && status.equalsIgnoreCase("Selesai"))) matchFilter = false;
+                } else if (currentFilter.equals("Belum Kompen")) {
+                    if (sisaMenit <= 0) matchFilter = false;
+                } else if (currentFilter.equals("Pending")) {
+                    boolean isPending = status.equalsIgnoreCase("Pending") || 
+                                        status.equalsIgnoreCase("Menunggu Persetujuan") || 
+                                        status.equalsIgnoreCase("Siap Diverifikasi") ||
+                                        (sisaMenit == 0 && !status.equalsIgnoreCase("Selesai"));
+                    if (!isPending) matchFilter = false;
+                }
+
+                if (matchFilter) {
+                    tempList.add(
+                            new KompensasiModel(
+                                    id,
+                                    namaMahasiswa,
+                                    nim,
+                                    kelas,
+                                    jumlahMenit,
+                                    sisaMenit,
+                                    tugas,
+                                    status,
+                                    tanggalMulai,
+                                    tanggal,
+                                    tanggalSelesai,
+                                    jamMulai,
+                                    jamSelesai,
+                                    fotoProfil
+                            )
+                    );
+                }
 
             } while (cursor.moveToNext());
         }
+        cursor.close();
+
+        // PAGINATION LOGIC
+        totalFilteredData = tempList.size();
+        int maxPage = (int) Math.ceil((double) totalFilteredData / ITEMS_PER_PAGE);
+        if (maxPage == 0) maxPage = 1;
+        if (currentPage >= maxPage) currentPage = maxPage - 1;
+        if (currentPage < 0) currentPage = 0;
+
+        int start = currentPage * ITEMS_PER_PAGE;
+        int end = Math.min(start + ITEMS_PER_PAGE, totalFilteredData);
+
+        for (int i = start; i < end; i++) {
+            kompensasiList.add(tempList.get(i));
+        }
+
+        tvPageInfo.setText("Halaman " + (currentPage + 1) + " dari " + maxPage);
+        
+        btnPrevPage.setEnabled(currentPage > 0);
+        btnPrevPage.setAlpha(currentPage > 0 ? 1.0f : 0.5f);
+        
+        btnNextPage.setEnabled(currentPage < maxPage - 1);
+        btnNextPage.setAlpha(currentPage < maxPage - 1 ? 1.0f : 0.5f);
 
         adapter.notifyDataSetChanged();
-
-        cursor.close();
     }
 
     // ================= TAMBAH =================

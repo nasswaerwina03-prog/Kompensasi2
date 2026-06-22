@@ -378,6 +378,10 @@ public class DashboardDosenPaActivity
     @Override
     protected void onResume() {
         super.onResume();
+        
+        // Refresh data
+        loadDashboard();
+        
         android.content.SharedPreferences preferences = getSharedPreferences("SESSION", MODE_PRIVATE);
         String uname = preferences.getString("username", "");
         if (uname != null && !uname.isEmpty()) {

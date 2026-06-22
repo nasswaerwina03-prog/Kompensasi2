@@ -220,6 +220,44 @@
                 android:layout_marginTop="14dp"
                 android:nestedScrollingEnabled="false"/>
 
+            <!-- ================= PAGINATION ================= -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPrevPage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="&lt;"
+                    android:layout_marginEnd="16dp"
+                    app:cornerRadius="12dp"
+                    app:backgroundTint="#B1456E"/>
+
+                <TextView
+                    android:id="@+id/tvPageInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Halaman 1"
+                    android:textColor="#2B1D24"
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnNextPage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="&gt;"
+                    android:layout_marginStart="16dp"
+                    app:cornerRadius="12dp"
+                    app:backgroundTint="#B1456E"/>
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

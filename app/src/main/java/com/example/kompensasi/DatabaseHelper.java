@@ -262,6 +262,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertDefaultUser(
                 db,
                 "Sony Oktapriandi, S.Kom., M.Kom.",
+
                 "197510272008121000",
                 "123",
                 "kajur"
@@ -824,13 +825,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
 
         // ================= STATUS FINAL =================
-
+        // ================= UPDATE STATUS =================
         if (jumlahmenit == 0) {
             values.put("status_final", "Selesai");
-        } else if (jumlahmenit > 360) {
-            values.put("status_final", "Menunggu Persetujuan");
         } else {
-            values.put("status_final", "Pending");
+            values.put("status_final", "Belum Kompen");
         }
 
         values.put(
@@ -1412,6 +1411,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "tanggal_mulai",
                 tanggalMulai
         );
+
+        if (jumlahMenit == 0) {
+            values.put("status_final", "Selesai");
+        } else {
+            values.put("status_final", "Belum Kompen");
+        }
 
         db.update(
                 "tb_kompensasi",
@@ -2291,10 +2296,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void approveFinalDosenPa(int idKompensasi, int idMahasiswa) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // Update status_final dan tanggal_selesai kompensasi
+        // Update status_final kompensasi (jangan Selesai dulu karena masih butuh Sekjur & Kajur)
         ContentValues kv = new ContentValues();
-        kv.put("status_final", "Selesai");
-        kv.put("tanggal_selesai", java.text.DateFormat.getDateInstance().format(new java.util.Date()));
+        kv.put("status_final", "Menunggu Persetujuan Sekjur");
         db.update("tb_kompensasi", kv, "id_kompensasi=?", new String[]{String.valueOf(idKompensasi)});
 
         // Cek apakah sudah ada pengajuan
@@ -2475,6 +2479,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String email = null;
         if (cursor.moveToFirst()) {
             email = cursor.getString(0);
+            if (email == null) email = "";
         }
         cursor.close();
         return email;
@@ -2486,10 +2491,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String email = null;
         if (cursor.moveToFirst()) {
             email = cursor.getString(0);
+            if (email == null) email = "";
         }
         cursor.close();
         return email;
     }
 }
+
 
 

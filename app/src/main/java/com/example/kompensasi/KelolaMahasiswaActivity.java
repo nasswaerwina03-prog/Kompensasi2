@@ -57,7 +57,15 @@ public class KelolaMahasiswaActivity
 
     MahasiswaAdapter adapter;
 
-    @Override
+    // ================= PAGINATION =================
+
+    com.google.android.material.button.MaterialButton btnPrevPage, btnNextPage;
+    TextView tvPageInfo;
+
+    private int currentPage = 0;
+    private static final int ITEMS_PER_PAGE = 50;
+    private String currentKeyword = "";
+    private int totalFilteredData = 0;
     // ================= INISIALISASI HALAMAN (ONCREATE) =================
     // Posisi ini dijalankan pertama kali saat halaman dibuka untuk mengatur tampilan.
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +151,10 @@ public class KelolaMahasiswaActivity
         recyclerMahasiswa =
                 findViewById(R.id.recyclerMahasiswa);
 
+        btnPrevPage = findViewById(R.id.btnPrevPage);
+        btnNextPage = findViewById(R.id.btnNextPage);
+        tvPageInfo = findViewById(R.id.tvPageInfo);
+
         navRumah =
                 findViewById(R.id.navRumah);
 
@@ -205,6 +217,22 @@ public class KelolaMahasiswaActivity
             excelLauncher.launch(intent);
         });
 
+        // ================= PAGINATION =================
+        btnPrevPage.setOnClickListener(v -> {
+            if (currentPage > 0) {
+                currentPage--;
+                loadMahasiswaData(currentKeyword);
+            }
+        });
+
+        btnNextPage.setOnClickListener(v -> {
+            int maxPage = (int) Math.ceil((double) totalFilteredData / ITEMS_PER_PAGE) - 1;
+            if (currentPage < maxPage) {
+                currentPage++;
+                loadMahasiswaData(currentKeyword);
+            }
+        });
+
         // ================= SEARCH =================
 
         etSearchMahasiswa.addTextChangedListener(
@@ -228,8 +256,10 @@ public class KelolaMahasiswaActivity
                             int count
                     ) {
 
+                        currentKeyword = s.toString();
+                        currentPage = 0;
                         loadMahasiswaData(
-                                s.toString()
+                                currentKeyword
                         );
                     }
 
@@ -354,6 +384,8 @@ public class KelolaMahasiswaActivity
                         keyword
                 );
 
+        ArrayList<MahasiswaModel> tempList = new ArrayList<>();
+
         if (cursor.moveToFirst()) {
 
             int fotoIndex = -1;
@@ -365,7 +397,7 @@ public class KelolaMahasiswaActivity
 
                 String foto = fotoIndex != -1 ? cursor.getString(fotoIndex) : null;
 
-                mahasiswaList.add(
+                tempList.add(
                         new MahasiswaModel(
                                 cursor.getInt(0),
                                 cursor.getString(2),
@@ -378,10 +410,31 @@ public class KelolaMahasiswaActivity
 
             } while (cursor.moveToNext());
         }
+        cursor.close();
+
+        // PAGINATION LOGIC
+        totalFilteredData = tempList.size();
+        int maxPage = (int) Math.ceil((double) totalFilteredData / ITEMS_PER_PAGE);
+        if (maxPage == 0) maxPage = 1;
+        if (currentPage >= maxPage) currentPage = maxPage - 1;
+        if (currentPage < 0) currentPage = 0;
+
+        int start = currentPage * ITEMS_PER_PAGE;
+        int end = Math.min(start + ITEMS_PER_PAGE, totalFilteredData);
+
+        for (int i = start; i < end; i++) {
+            mahasiswaList.add(tempList.get(i));
+        }
+
+        tvPageInfo.setText("Halaman " + (currentPage + 1) + " dari " + maxPage);
+
+        btnPrevPage.setEnabled(currentPage > 0);
+        btnPrevPage.setAlpha(currentPage > 0 ? 1.0f : 0.5f);
+
+        btnNextPage.setEnabled(currentPage < maxPage - 1);
+        btnNextPage.setAlpha(currentPage < maxPage - 1 ? 1.0f : 0.5f);
 
         adapter.notifyDataSetChanged();
-
-        cursor.close();
     }
 
     // ================= TAMBAH MAHASISWA =================
